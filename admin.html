@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td{
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th{
+            background-color: #f4f4f4;
+        }
+
+        button{
+            padding: 5px 10px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Admin Feedback Dashboard</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Feedback</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="feedbackTable">
+        </tbody>
+    </table>
+
+ <script>
+async function loadFeedbacks() {
+    const res = await fetch(
+        "http://localhost:5000/api/feedback/all"
+    );
+
+    const data = await res.json();
+
+    const table =
+        document.getElementById("feedbackTable");
+
+    table.innerHTML = "";
+
+    data.forEach(item => {
+        table.innerHTML += `
+        <tr>
+            <td>${item._id}</td>
+            <td>${item.feedbackText}</td>
+            <td>${new Date(item.createdAt).toLocaleDateString()}</td>
+            <td>
+                <button onclick="deleteFeedback('${item._id}')">
+                    Delete
+                </button>
+            </td>
+        </tr>`;
+    });
+}
+
+async function deleteFeedback(id) {
+    await fetch(
+        `http://localhost:5000/api/feedback/${id}`,
+        { method: "DELETE" }
+    );
+
+    loadFeedbacks();
+}
+
+loadFeedbacks();
+</script>

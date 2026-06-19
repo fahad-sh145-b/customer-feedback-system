@@ -1,0 +1,29 @@
+body{
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#f4f4f4;
+}
+
+.container{
+width:350px;
+padding:20px;
+background:white;
+box-shadow:0 0 10px #ccc;
+}
+
+input,
+textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:10px;
+cursor:pointer;
+margin-top:10px;
+}

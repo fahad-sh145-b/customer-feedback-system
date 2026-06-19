@@ -1,0 +1,33 @@
+
+<script>
+alert("User ID = " + localStorage.getItem("userId"));
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>Feedback</h2>
+
+<textarea id="feedback"></textarea>
+
+<button onclick="addFeedback()">
+Add Feedback
+</button>
+
+<button onclick="updateFeedback()">
+Edit Feedback
+</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
